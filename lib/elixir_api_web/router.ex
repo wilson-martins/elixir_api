@@ -10,8 +10,9 @@ defmodule ElixirApiWeb.Router do
 
     # Anagrams Controller
     scope "/anagrams" do
-      get("/", AnagramsController, :index)
-      get("/words", AnagramsController, :getWords)
+      get("/", AnagramController, :index)
+      get("/words", AnagramController, :getWords)
+      get("/load-file", AnagramController, :loadFile)
     end
   end
 end

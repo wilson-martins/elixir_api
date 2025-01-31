@@ -1,4 +1,6 @@
 defmodule ElixirApi.Services.Dictionary do
+  alias ElixirApi.Repo
+
   @spec signature_of(String.t()) :: String.t()
   def signature_of(word) when not is_binary(word), do: ""
 
@@ -21,12 +23,7 @@ defmodule ElixirApi.Services.Dictionary do
   def lookup_by_signature(word) when is_binary(word) do
     signature = signature_of(word)
 
-    File.read!("./assets/words.txt")
-    |> String.downcase()
-    |> String.split("\n")
-    |> Enum.map(&String.replace(&1, "\r", ""))
-    |> Enum.map(&String.trim/1)
-    |> Enum.filter(&(signature_of(String.downcase(&1)) == signature))
-    |> Enum.uniq()
+    Repo.Anagram.find_anagrams_by_signature(signature)
+    |> Enum.map(& &1.word)
   end
 end
