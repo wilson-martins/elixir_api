@@ -1,4 +1,4 @@
-defmodule ElixirApi.AnagramsTest do
+defmodule ElixirApi.Repo.AnagramTest do
   use ElixirApi.DataCase
 
   alias ElixirApi.Repo

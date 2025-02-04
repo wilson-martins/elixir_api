@@ -3,6 +3,7 @@ defmodule ElixirApiWeb.AnagramController do
 
   alias ElixirApi.Services
   alias ElixirApi.Repo
+  alias ElixirApi.Services.Dictionary
 
   action_fallback ElixirApiWeb.FallbackController
 
@@ -19,7 +20,7 @@ defmodule ElixirApiWeb.AnagramController do
       |> String.split("\n")
       |> Enum.map(&String.replace(&1, "\r", ""))
       |> Enum.map(&String.trim/1)
-      |> Enum.map(&%{:word => &1, :signature => Services.Dictionary.signature_of(&1)})
+      |> Enum.map(&%{:word => &1, :signature => Dictionary.signature_of(&1)})
 
     with {:ok, count} <- Repo.Anagram.create_anagrams(anagrams) do
       conn

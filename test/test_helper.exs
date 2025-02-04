@@ -1,2 +1,7 @@
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(ElixirApi.Repo, :manual)
+
+Mox.defmock(ElixirApi.Services.DictionaryBehaviourMock,
+  for: ElixirApi.Services.DictionaryBehaviour
+)
+
+Application.put_env(:elixir_api, :dictionary, ElixirApi.Services.DictionaryBehaviourMock)
